@@ -1,28 +1,21 @@
-version: '3.7'
-
 services:
-  mysql:
-    image: mysql:5.7
+  working:
+    build: ./working
     volumes:
+      - ./storage:/storage
+    command: ["tail", "-f", "/dev/null"]
+
+  mysql:
+    build: ./mysql
+    volumes:
+      - ./sql://docker-entrypoint-initdb.d/initialize.sql 
       - db_data:/var/lib/mysql
-      - ./sql:/docker-entrypoint-initdb.d
     restart: always
     environment:
       MYSQL_ROOT_PASSWORD: 'password'
-      MYSQL_DATABASE: 'test'
-      MYSQL_USER: 'data_user'
-      MYSQL_PASSWORD: 'data'
-  phpmyadmin:
-    depends_on:
-      - mysql
-    image: phpmyadmin/phpmyadmin
-    environment:
-      PMA_HOST: mysql
-    restart: always
-    ports:
-      - "8080:80"
+      MYSQL_DATABASE: test
 
-  php-apache:
+  php:
     build: ./php
     volumes:
       - ./htdocs:/var/www/html
@@ -33,4 +26,4 @@ services:
       - mysql
 
 volumes:
-    db_data: {}
+  db_data: {}
