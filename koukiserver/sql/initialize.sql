@@ -92,9 +92,18 @@ INSERT INTO gacha_items (gacha_id, item_id, weight) VALUES
 
 ALTER TABLE items ADD COLUMN rarity VARCHAR(20) NOT NULL DEFAULT '普通';
 
--- 例としてデータを更新
+
 UPDATE items SET rarity = '神レア' WHERE item_id = 1;
 UPDATE items SET rarity = '超レア' WHERE item_id = 2;
 UPDATE items SET rarity = 'レア' WHERE item_id = 3;
 UPDATE items SET rarity = '普通' WHERE item_id = 4;
 UPDATE items SET rarity = 'ガラクタ' WHERE item_id = 5;
+
+ALTER TABLE items ADD COLUMN image VARCHAR(255) DEFAULT NULL;
+
+
+UPDATE items SET image = 'img/god_item.png' WHERE item_id = 1;
+UPDATE items SET image = 'img/super_rare.png' WHERE item_id = 2;
+UPDATE items SET image = 'img/rare.png' WHERE item_id = 3;
+UPDATE items SET image = 'img/normal.png' WHERE item_id = 4;
+UPDATE items SET image = 'img/junk.png' WHERE item_id = 5;
