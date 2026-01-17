@@ -16,7 +16,6 @@ $sql = "
 $stmt = $pdo->prepare($sql);
 $stmt->execute(['gacha_id' => $gachaId]);
 $items = $stmt->fetchAll();
-
 if (!$items) die('ガチャデータがありません');
 
 $totalWeight = array_sum(array_column($items, 'weight'));
@@ -64,7 +63,10 @@ body { font-family: sans-serif; }
 }
 .item img {
     border-radius: 8px;
-    box-shadow: 0 0 5px rgba(0,0,0,0.5);
+    box-shadow: 0 0 8px rgba(0,0,0,0.5);
+    width: 100px;
+    display: block;
+    margin: 0 auto 5px;
 }
 </style>
 </head>
@@ -75,7 +77,7 @@ body { font-family: sans-serif; }
 <?php if(!empty($results)): ?>
     <?php foreach($results as $index=>$item): ?>
         <div class="item" style="color: <?= $rarityColors[$item['rarity']] ?? 'black' ?>;" data-index="<?= $index ?>">
-            <img src="<?= htmlspecialchars($item['image'],ENT_QUOTES) ?>" alt="<?= htmlspecialchars($item['item_name'],ENT_QUOTES) ?>" width="100">
+            <img src="<?= htmlspecialchars($item['image'],ENT_QUOTES) ?>" alt="<?= htmlspecialchars($item['item_name'],ENT_QUOTES) ?>">
             <?= $index+1 ?>：<?= htmlspecialchars($item['item_name'],ENT_QUOTES) ?> (<?= $item['rarity'] ?>)
         </div>
     <?php endforeach; ?>

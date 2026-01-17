@@ -102,7 +102,7 @@ UPDATE items SET rarity = 'ガラクタ' WHERE item_id = 5;
 ALTER TABLE items ADD COLUMN image VARCHAR(255) DEFAULT NULL;
 
 
-UPDATE items SET image = 'img/god_item.png' WHERE item_id = 1;
+UPDATE items SET image = 'img/god.png' WHERE item_id = 1;
 UPDATE items SET image = 'img/super_rare.png' WHERE item_id = 2;
 UPDATE items SET image = 'img/rare.png' WHERE item_id = 3;
 UPDATE items SET image = 'img/normal.png' WHERE item_id = 4;
